@@ -473,7 +473,6 @@ If you would like to have your project included, feel free to get in touch or
 submit a PR with a `README.md` edit.
 
 ## Acknowledgements and Contacts
-
 gemma.cpp was started in fall 2023 by [Austin Huang](mailto:austinvhuang@google.com)
 and [Jan Wassenberg](mailto:janwas@google.com), and subsequently released February 2024
 thanks to contributions from Phil Culliton, Paul Chang, and Dan Zheng.
