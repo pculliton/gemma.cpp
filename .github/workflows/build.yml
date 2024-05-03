@@ -68,7 +68,7 @@ jobs:
 
       with:
         id:  "phillipculliton/gemma-build-artifacts"
-        files: /home/runner/work/gemma.cpp/gemma.cpp/build/*
+        files: gemma-ubuntu-latest-make-Release.zip
 
   bazel:
     runs-on: ubuntu-latest
