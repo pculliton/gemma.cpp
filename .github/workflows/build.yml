@@ -61,7 +61,7 @@ jobs:
           ${{ github.workspace }}/build/libgemma.a
 
     - name: Upload build artifacts to Kaggle
-      uses: jaimevalero/push-kaggle-dataset@v3.1 # This is the action
+      uses: pculliton/push-kaggle-dataset@v1.0.0 # This is the action
       env:
         KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
         KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
