@@ -71,7 +71,6 @@ jobs:
         files: |
           /build/gemma
           /build/libsentencepiece.so.0
-
   bazel:
     runs-on: ubuntu-latest
     steps:
