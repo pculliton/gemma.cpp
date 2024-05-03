@@ -68,11 +68,7 @@ jobs:
 
       with:
         id:  "phillipculliton/gemma-build-artifacts"
-        files: |
-          ${{ github.workspace }}/build/${{ matrix.build_type }}/gemma.exe
-          ${{ github.workspace }}/build/${{ matrix.build_type }}/libgemma.lib
-          ${{ github.workspace }}/build/gemma
-          ${{ github.workspace }}/build/libgemma.a
+        files: ${{ github.workspace }}/build/gemma
 
   bazel:
     runs-on: ubuntu-latest
