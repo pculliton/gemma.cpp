@@ -60,6 +60,24 @@ jobs:
           ${{ github.workspace }}/build/gemma
           ${{ github.workspace }}/build/libgemma.a
 
+    - name: Upload build artifacts to Kaggle
+      uses: jaimevalero/push-kaggle-dataset@v3.1 # This is the action
+      env:
+        KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+        KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+
+      with:
+        id:  "phillipculliton/gemma-build-artifacts"
+        title: "Gemma.cpp Build Artifacts"
+        subtitle: "Build artifacts for gemma.cpp testing"
+        description: ""
+        files: |
+          ${{ github.workspace }}/build/${{ matrix.build_type }}/gemma.exe
+          ${{ github.workspace }}/build/${{ matrix.build_type }}/libgemma.lib
+          ${{ github.workspace }}/build/gemma
+          ${{ github.workspace }}/build/libgemma.a
+        is_public: false
+
   bazel:
     runs-on: ubuntu-latest
     steps:
