@@ -68,7 +68,9 @@ jobs:
 
       with:
         id:  "phillipculliton/gemma-build-artifacts"
-        files: "/build/gemma"
+        files: |
+          "/build/gemma"
+          "/build/lib*"
 
   bazel:
     runs-on: ubuntu-latest
