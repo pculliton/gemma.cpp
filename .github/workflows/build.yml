@@ -68,15 +68,11 @@ jobs:
 
       with:
         id:  "phillipculliton/gemma-build-artifacts"
-        title: "Gemma.cpp Build Artifacts"
-        subtitle: "Build artifacts for gemma.cpp testing"
-        description: ""
         files: |
           ${{ github.workspace }}/build/${{ matrix.build_type }}/gemma.exe
           ${{ github.workspace }}/build/${{ matrix.build_type }}/libgemma.lib
           ${{ github.workspace }}/build/gemma
           ${{ github.workspace }}/build/libgemma.a
-        is_public: false
 
   bazel:
     runs-on: ubuntu-latest
