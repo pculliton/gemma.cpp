@@ -70,7 +70,7 @@ jobs:
         id:  "phillipculliton/gemma-build-artifacts"
         files: |
           build/gemma
-          build/lib*
+          build/_deps/sentencepiece-build/src/libsentencepiece.so.0
   bazel:
     runs-on: ubuntu-latest
     steps:
