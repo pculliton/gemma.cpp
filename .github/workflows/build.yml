@@ -71,6 +71,25 @@ jobs:
         files: |
           build/gemma
           build/_deps/sentencepiece-build/src/libsentencepiece.so.0
+
+    - name: Create code for new test notebook version
+      run: |
+        cat >> runner.py << EOF
+        from glob import glob
+        glob("**", recursive=True)
+    
+    - name: Run kaggle test notebook
+      uses: pculliton/kaggle-action@v1.0.0
+      with:
+        username: ${{ secrets.KAGGLE_USERNAME }}
+        key: ${{ secrets.KAGGLE_TOKEN }}
+        # The name of the kernel to use for testing.
+        title: Gemma-cpp-CI ${{ github.sha }}
+        # The location of your test script, which we will write next.
+        code_file: runner.py
+        # "username/model-slug/framework/variation-slug/version-number"
+        model_sources: "google/gemma/gemmaCpp/2b-it-sfp"
+        enable_gpu: False
   bazel:
     runs-on: ubuntu-latest
     steps:
