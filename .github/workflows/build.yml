@@ -79,7 +79,7 @@ jobs:
         glob("**", recursive=True)
     
     - name: Run kaggle test notebook
-      uses: pculliton/kaggle-action@v1.0.1
+      uses: pculliton/kaggle-action@v1.0.2
       with:
         username: ${{ secrets.KAGGLE_USERNAME }}
         key: ${{ secrets.KAGGLE_KEY }}
