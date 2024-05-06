@@ -79,10 +79,10 @@ jobs:
         glob("**", recursive=True)
     
     - name: Run kaggle test notebook
-      uses: pculliton/kaggle-action@v1.0.0
+      uses: pculliton/kaggle-action@v1.0.1
       with:
         username: ${{ secrets.KAGGLE_USERNAME }}
-        key: ${{ secrets.KAGGLE_TOKEN }}
+        key: ${{ secrets.KAGGLE_KEY }}
         # The name of the kernel to use for testing.
         title: Gemma-cpp-CI
         # The location of your test script, which we will write next.
