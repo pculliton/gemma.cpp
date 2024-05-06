@@ -84,7 +84,7 @@ jobs:
         username: ${{ secrets.KAGGLE_USERNAME }}
         key: ${{ secrets.KAGGLE_KEY }}
         # The name of the kernel to use for testing.
-        title: GemmaCPP-CI
+        title: GemmaCPP-CI-2
         # The location of your test script, which we will write next.
         code_file: runner.py
         # "username/model-slug/framework/variation-slug/version-number"
