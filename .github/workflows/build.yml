@@ -88,7 +88,7 @@ jobs:
         # The location of your test script, which we will write next.
         code_file: runner.py
         # "username/model-slug/framework/variation-slug/version-number"
-        model_sources: "google/gemma/gemmaCpp/2b-it-sfp"
+        model_sources: "google/gemma/gemmaCpp/2b-it-sfp/4"
         enable_gpu: False
   bazel:
     runs-on: ubuntu-latest
