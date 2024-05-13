@@ -78,6 +78,10 @@ jobs:
         from glob import glob
         glob("**", recursive=True)
         EOF
+
+    - name: Show current file locations
+      shell: bash
+      run: ls *
     
     - name: Run kaggle test notebook
       uses: pculliton/kaggle-action@v1.0.14
