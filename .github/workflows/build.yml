@@ -95,7 +95,7 @@ jobs:
         # "username/model-slug/framework/variation-slug/version-number"
         model_sources: "google/gemma/gemmaCpp/2b-it-sfp/4"
         enable_gpu: False
-        kernel_type: notebook
+        kernel_type: script
   bazel:
     runs-on: ubuntu-latest
     steps:
