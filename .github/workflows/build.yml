@@ -80,7 +80,7 @@ jobs:
         EOF
     
     - name: Run kaggle test notebook
-      uses: pculliton/kaggle-action@v1.0.10
+      uses: pculliton/kaggle-action@v1.0.11
       with:
         username: ${{ secrets.KAGGLE_USERNAME }}
         key: ${{ secrets.KAGGLE_KEY }}
