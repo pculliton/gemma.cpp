@@ -84,7 +84,7 @@ jobs:
       run: ls *
     
     - name: Run kaggle test notebook
-      uses: pculliton/kaggle-action@v1.0.15
+      uses: pculliton/kaggle-action@v1.0.16
       with:
         username: ${{ secrets.KAGGLE_USERNAME }}
         key: ${{ secrets.KAGGLE_KEY }}
