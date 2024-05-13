@@ -77,6 +77,7 @@ jobs:
         cat >> runner.py << EOF
         from glob import glob
         glob("**", recursive=True)
+        EOF
     
     - name: Run kaggle test notebook
       uses: pculliton/kaggle-action@v1.0.10
