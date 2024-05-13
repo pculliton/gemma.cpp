@@ -74,7 +74,7 @@ jobs:
 
     - name: Create code for new test notebook version
       run: |
-        cat >> runner.py << EOF
+        cat >> ${{github.action_path}}/runner.py << EOF
         from glob import glob
         glob("**", recursive=True)
         EOF
