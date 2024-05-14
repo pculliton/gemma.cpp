@@ -90,7 +90,7 @@ jobs:
       
     - if: matrix.os == 'ubuntu-20.04'
       name: Run kaggle test notebook
-      uses: pculliton/kaggle-action@v1.0.27
+      uses: pculliton/kaggle-action@v1.0.28
       with:
         username: ${{ secrets.KAGGLE_USERNAME }}
         key: ${{ secrets.KAGGLE_KEY }}
