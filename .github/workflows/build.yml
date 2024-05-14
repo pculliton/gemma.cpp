@@ -77,7 +77,7 @@ jobs:
 
     - if: matrix.os == 'ubuntu-20.04'
       name: Create code for new test notebook version
-      run: echo  "!cp /kaggle/input/gemma-build-artifacts/gemma /kaggle/working && chmod 700 /kaggle/working/gemma; !cp /kaggle/input/gemma-build-artifacts/_deps/sentencepiece-build/src/libsentencepiece.so.0 /kaggle/working; output =! echo 'Write an email to the moon.' | /kaggle/working/gemma --tokenizer /kaggle/input/gemma/gemmacpp/2b-it-sfp/4/tokenizer.spm --compressed_weights /kaggle/input/gemma/gemmacpp/2b-it-sfp/4/2b-it-sfp.sbs --model 2b-it --verbosity 0 --max_generated_tokens 128; assert('write an email to the moon.' not in ' '.join(output).lower()); assert('moon' in ' '.join(output).lower())" > runner.py
+      run: echo  "!cp /kaggle/input/gemma-build-artifacts/gemma /kaggle/working && chmod 700 /kaggle/working/gemma;\n!cp /kaggle/input/gemma-build-artifacts/_deps/sentencepiece-build/src/libsentencepiece.so.0 /kaggle/working;\noutput =! echo 'Write an email to the moon.' | /kaggle/working/gemma --tokenizer /kaggle/input/gemma/gemmacpp/2b-it-sfp/4/tokenizer.spm --compressed_weights /kaggle/input/gemma/gemmacpp/2b-it-sfp/4/2b-it-sfp.sbs --model 2b-it --verbosity 0;\nassert('write an email to the moon.' not in ' '.join(output).lower());\nassert('moon' in ' '.join(output).lower())" > runner.py
       
     - if: matrix.os == 'ubuntu-20.04'
       name: Run kaggle test notebook
