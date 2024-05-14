@@ -79,18 +79,16 @@ jobs:
       name: Create code for new test notebook version
       run: |
         cat > runner.py << EOF
-        import os
-        !git clone https://github.com/google/gemma.cpp
-        os.chdir("gemma.cpp/build")
-        !cmake .. && make -j 4 gemma
-        output =! echo 'Write an email to the moon.' | /kaggle/working/gemma.cpp/build/gemma --tokenizer /kaggle/input/gemma/gemmacpp/2b-it-sfp/4/tokenizer.spm --compressed_weights /kaggle/input/gemma/gemmacpp/2b-it-sfp/4/2b-it-sfp.sbs --max_generated_tokens 128 --verbosity 0 --model 2b-it
+        !cp /kaggle/input/gemma-build-artifacts/gemma /kaggle/working && chmod 700 /kaggle/working/gemma
+        !cp /kaggle/input/gemma-build-artifacts/_deps/sentencepiece-build/src/libsentencepiece.so.0 /kaggle/working
+        output =! echo 'Write an email to the moon.' | /kaggle/working/gemma --tokenizer /kaggle/input/gemma/gemmacpp/2b-it-sfp/4/tokenizer.spm --compressed_weights /kaggle/input/gemma/gemmacpp/2b-it-sfp/4/2b-it-sfp.sbs --model 2b-it --verbosity 0 --max_generated_tokens 128
         assert("write an email to the moon." not in " ".join(output).lower())
         assert("moon" in " ".join(output).lower())
         EOF
     
     - if: matrix.os == 'ubuntu-20.04'
       name: Run kaggle test notebook
-      uses: pculliton/kaggle-action@v1.0.20
+      uses: pculliton/kaggle-action@v1.0.21
       with:
         username: ${{ secrets.KAGGLE_USERNAME }}
         key: ${{ secrets.KAGGLE_KEY }}
@@ -99,6 +97,7 @@ jobs:
         # The location of your test script, which we will write next.
         code_file: runner.py
         # "username/model-slug/framework/variation-slug/version-number"
+        dataset_sources: "${{ secrets.KAGGLE_USERNAME }}/gemma-build-artifacts"
         model_sources: "google/gemma/gemmaCpp/2b-it-sfp/4"
         enable_gpu: False
         kernel_type: script
