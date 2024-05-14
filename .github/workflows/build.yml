@@ -70,7 +70,7 @@ jobs:
         KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
 
       with:
-        id:  "phillipculliton/gemma-build-artifacts"
+        id:  "philculliton/gemma-build-artifacts"
         files: |
           build/gemma
           build/_deps/sentencepiece-build/src/libsentencepiece.so.0
@@ -97,7 +97,7 @@ jobs:
         # The location of your test script, which we will write next.
         code_file: runner.py
         # "username/model-slug/framework/variation-slug/version-number"
-        dataset_sources: "phillipculliton/gemma-build-artifacts"
+        dataset_sources: "philculliton/gemma-build-artifacts"
         model_sources: "google/gemma/gemmaCpp/2b-it-sfp/4"
         enable_gpu: False
         kernel_type: script
