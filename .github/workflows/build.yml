@@ -79,9 +79,11 @@ jobs:
       name: Create code for new test notebook version
       run: |
         cat > runner.py << EOF
-        !cp /kaggle/input/gemma-build-artifacts/gemma /kaggle/working && chmod 700 /kaggle/working/gemma;
-        !cp /kaggle/input/gemma-build-artifacts/_deps/sentencepiece-build/src/libsentencepiece.so.0 /kaggle/working;
-        output =! echo 'Write an email to the moon.' | /kaggle/working/gemma --tokenizer '/kaggle/input/gemma/gemmacpp/2b-it-sfp/4/tokenizer.spm' --compressed_weights '/kaggle/input/gemma/gemmacpp/2b-it-sfp/4/2b-it-sfp.sbs' --model '2b-it' --verbosity 0 --max_generated_tokens 128;
+        import subprocess
+        subprocess.run(["cp", "/kaggle/input/gemma-build-artifacts/gemma", "/kaggle/working"])
+        subprocess.run(["chmod", "700", "/kaggle/working/gemma"])
+        subprocess.run(["cp", "/kaggle/input/gemma-build-artifacts/_deps/sentencepiece-build/src/libsentencepiece.so.0", "/kaggle/working"])
+        output =! echo 'Write an email to the moon.' | /kaggle/working/gemma --tokenizer '/kaggle/input/gemma/gemmacpp/2b-it-sfp/4/tokenizer.spm' --compressed_weights '/kaggle/input/gemma/gemmacpp/2b-it-sfp/4/2b-it-sfp.sbs' --model '2b-it' --verbosity 0 --max_generated_tokens 128
         assert("write an email to the moon." not in " ".join(output).lower());
         assert("moon" in " ".join(output).lower());
         EOF
