@@ -17,10 +17,12 @@ jobs:
       fail-fast: false
       matrix:
         # When adding another, also add to copybara's github_check_runs.
-        os: ['ubuntu-latest', 'macos-latest', 'windows-latest']
+        os: ['ubuntu-latest', 'macos-latest', 'windows-latest', 'ubuntu-20.04']
         build_type: ['Release']
         preset: ['make', 'windows']
         exclude:
+          - os: ubuntu-20.04
+            preset: windows
           - os: ubuntu-latest
             preset: windows
           - os: macos-latest
@@ -60,7 +62,8 @@ jobs:
           ${{ github.workspace }}/build/gemma
           ${{ github.workspace }}/build/libgemma.a
 
-    - name: Upload build artifacts to Kaggle
+    - if: matrix.os == 'ubuntu-20.04'
+      name: Upload build artifacts to Kaggle
       uses: pculliton/push-kaggle-dataset@v1.0.0 # This is the action
       env:
         KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
@@ -72,18 +75,21 @@ jobs:
           build/gemma
           build/_deps/sentencepiece-build/src/libsentencepiece.so.0
 
-    - name: Create code for new test notebook version
+    - if: matrix.os == 'ubuntu-20.04'
+      name: Create code for new test notebook version
       run: |
         cat > runner.py << EOF
-        from glob import glob
-        glob("**", recursive=True)
+        import os
+        !git clone https://github.com/google/gemma.cpp
+        os.chdir("gemma.cpp/build")
+        !cmake .. && make -j 4 gemma
+        output =! echo 'Write an email to the moon.' | /kaggle/working/gemma.cpp/build/gemma --tokenizer /kaggle/input/gemma/gemmacpp/2b-it-sfp/4/tokenizer.spm --compressed_weights /kaggle/input/gemma/gemmacpp/2b-it-sfp/4/2b-it-sfp.sbs --max_generated_tokens 128 --verbosity 0 --model 2b-it
+        assert("write an email to the moon." not in " ".join(output).lower())
+        assert("moon" in " ".join(output).lower())
         EOF
-
-    - name: Show current file locations
-      shell: bash
-      run: ls *
     
-    - name: Run kaggle test notebook
+    - if: matrix.os == 'ubuntu-20.04'
+      name: Run kaggle test notebook
       uses: pculliton/kaggle-action@v1.0.20
       with:
         username: ${{ secrets.KAGGLE_USERNAME }}
